@@ -5,8 +5,8 @@ from app.routes import person
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
+@app.get("/", tags=["docs"])
+def docs_redirect():
     return RedirectResponse(url="/docs")
 
 

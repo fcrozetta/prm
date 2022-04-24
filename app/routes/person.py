@@ -11,12 +11,12 @@ import app.schemas.neo4j_schemas as neo4j_schemas
 router = APIRouter(prefix="/person", tags=["person"])
 
 
-@router.get("/")
+@router.get("/", response_model=list[neo4j_schemas.Person])
 def get_all_people(db: Session = Depends(get_db)):
     return crud.get_all_people(db)
 
 
-@router.post("/", response_model=list[neo4j_schemas.Person])
+@router.post("/", response_model=neo4j_schemas.Person)
 def create_person(person: neo4j_schemas.BasePerson, db: Session = Depends(get_db)):
     return crud.create_person(db, person)
 
@@ -31,12 +31,12 @@ def related_to(person_id: int, relationship: str, db: Session = Depends(get_db))
     return crud.get_relationship_nodes(db, person_id, relationship)
 
 
-@router.post("/{person_id}/{relationship}/{id_to_know}")
+@router.post("/{person_id}/{relationship}/{id_to_link}")
 def link(
     person_id: int,
-    id_to_know: int,
+    id_to_link: int,
     relationship: str,
     parameters: dict = None,
     db: Session = Depends(get_db),
 ):
-    return crud.link(db, person_id, id_to_know, relationship, parameters)
+    return crud.link(db, person_id, id_to_link, relationship, parameters)
