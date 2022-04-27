@@ -6,8 +6,6 @@ class _ID(BaseModel):
 
 
 # * Node models
-
-
 class GenericNode(_ID):
     labels: set
     properties: dict | None
@@ -26,4 +24,15 @@ class BasePerson(BaseModel):
 
 
 class Person(BasePerson, _ID):
+    pass
+
+
+class BaseCountry(BaseModel):
+    name: str | None
+    code: str | None
+    population: int | None
+    timezone: str | None
+
+
+class Country(BaseCountry, _ID):
     pass

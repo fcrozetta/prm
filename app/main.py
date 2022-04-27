@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from app.routes import person
+from .routes import person, country
 
 app = FastAPI()
 
@@ -11,3 +11,4 @@ def docs_redirect():
 
 
 app.include_router(person.router)
+app.include_router(country.router)
