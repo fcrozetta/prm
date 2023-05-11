@@ -6,6 +6,7 @@ class GremlinDb:
     g: GraphTraversalSource
 
     def __init__(self, connection_string="ws://localhost:8182/gremlin") -> None:
+        # TODO: Fix connection string default value
         self.g = traversal().withRemote(DriverRemoteConnection(connection_string, "g"))
         self.__is_conected__()
 
@@ -17,3 +18,7 @@ class GremlinDb:
         except Exception as e:
             raise e
         return True
+
+    def __search_label__(self, label: str):
+        result = self.g.V().hasLabel(label).propertyMap()
+        return result

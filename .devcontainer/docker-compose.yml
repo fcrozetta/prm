@@ -1,6 +1,6 @@
 version: "3.9"
 services:
   graphdb:
-    image: "tinkerpop/gremlin-server"
+    image: "janusgraph/janusgraph"
     ports:
       - "8182:8182"
